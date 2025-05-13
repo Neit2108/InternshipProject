@@ -16,10 +16,10 @@ namespace Ecommerce.Core.Entities
         public int BookId { get; set; }
         [Required]
         [StringLength(255)]
-        [Column("nvarchar(255)")]
+        [Column(TypeName = "nvarchar(255)")]
         public string Name { get; set; }
         [StringLength(1000)]
-        [Column("nvarchar(1000)")]
+        [Column(TypeName = "nvarchar")]
         public string? Description { get; set; }
         [ForeignKey("BookId")]
         public ICollection<Book> Books { get; set; } // -> 1 Category - nhiều sách

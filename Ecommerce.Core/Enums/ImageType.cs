@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Core.Enums
 {
-    public enum Gender
+    public enum ImageType
     {
-        Male = 1,
-        Female = 2,
-        Others = 3
+        Book = 1,
+        Author = 2,
     }
 }

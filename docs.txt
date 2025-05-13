@@ -355,67 +355,101 @@ Cấu trúc dự án cho phép dễ dàng:
 - Thay đổi công nghệ lưu trữ (chỉ cần thực hiện lại các repository)
 - Thay đổi UI (chỉ cần thay đổi view, giữ nguyên controller và service)
 
-
-YourProject/
+YourBookstore/
 │
 ├── src/                              # Mã nguồn chính của ứng dụng
-│   ├── YourProject.Web/             # Dự án web MVC chính
-│   │   ├── Controllers/             # Các controller xử lý request
-│   │   ├── Views/                   # Giao diện người dùng
-│   │   │   ├── Shared/             # Các view được dùng chung
-│   │   │   ├── Home/               # View của HomeController
-│   │   │   └── ...                 # Các thư mục view khác theo controller
-│   │   ├── Models/                 # Các model phục vụ view (ViewModel)
-│   │   ├── ViewComponents/         # Các view component tái sử dụng
-│   │   ├── wwwroot/                # Tài nguyên tĩnh (CSS, JS, images...)
+│   ├── YourBookstore.Web/            # Dự án web MVC chính (Presentation Layer)
+│   │   ├── Controllers/              # Các controller xử lý request
+│   │   │   └── BooksController.cs
+│   │   │
+│   │   ├── Views/                    # Giao diện người dùng
+│   │   │   ├── Shared/               # Các view dùng chung
+│   │   │   │   └── _Layout.cshtml
+│   │   │   ├── Books/                # View của BooksController
+│   │   │   │   ├── Index.cshtml
+│   │   │   │   └── Details.cshtml
+│   │   │   └── _ViewImports.cshtml
+│   │   │
+│   │   ├── Models/                   # View Models
+│   │   │   └── BookViewModel.cs
+│   │   │
+│   │   ├── Services/                 # Các service phục vụ controller
+│   │   │   └── BookViewService.cs
+│   │   │
+│   │   ├── wwwroot/                  # Tài nguyên tĩnh (CSS, JS, images...)
 │   │   │   ├── css/
+│   │   │   │   └── site.css
 │   │   │   ├── js/
-│   │   │   ├── lib/                # Thư viện third-party
+│   │   │   │   └── site.js
 │   │   │   └── images/
-│   │   ├── Areas/                  # Phân vùng chức năng (nếu cần)
-│   │   ├── Filters/                # Action filters
-│   │   ├── Extensions/             # Các extension method
-│   │   ├── Middlewares/            # Custom middleware
-│   │   ├── Services/               # Các service phục vụ controller
-│   │   ├── TagHelpers/             # Custom tag helpers
-│   │   ├── appsettings.json        # Cấu hình ứng dụng
-│   │   ├── Program.cs              # Điểm khởi chạy ứng dụng
-│   │   └── Startup.cs              # Cấu hình dịch vụ và pipeline
+│   │   │       └── logo.png
+│   │   │
+│   │   ├── appsettings.json          # Cấu hình ứng dụng
+│   │   ├── appsettings.Development.json
+│   │   ├── Program.cs                # Điểm khởi chạy ứng dụng
+│   │   └── Startup.cs                # Cấu hình dịch vụ và pipeline
 │   │
-│   ├── YourProject.Core/           # Logic nghiệp vụ cốt lõi, bất biến
-│   │   ├── Entities/               # Các entity (đối tượng nghiệp vụ)
-│   │   ├── Interfaces/             # Các interface
-│   │   ├── Enums/                  # Các enum
-│   │   ├── Exceptions/             # Custom exceptions
-│   │   ├── Services/               # Các dịch vụ nghiệp vụ
-│   │   └── DTOs/                   # Data Transfer Objects
+│   ├── YourBookstore.Core/           # Logic nghiệp vụ cốt lõi (Business Logic Layer)
+│   │   ├── Entities/                 # Các entity (đối tượng nghiệp vụ)
+│   │   │   └── Book.cs
+│   │   │
+│   │   ├── Interfaces/               # Các interface
+│   │   │   ├── IBookRepository.cs
+│   │   │   └── IBookService.cs
+│   │   │
+│   │   ├── DTOs/                     # Data Transfer Objects
+│   │   │   └── BookDTO.cs
+│   │   │
+│   │   ├── Services/                 # Các dịch vụ nghiệp vụ
+│   │   │   └── BookService.cs
+│   │   │
+│   │   └── Exceptions/               # Custom exceptions
+│   │       └── BookNotFoundException.cs
 │   │
-│   ├── YourProject.Infrastructure/ # Tầng hạ tầng (database, external services)
-│   │   ├── Data/                   # Tương tác với database
-│   │   │   ├── Contexts/           # DbContext
-│   │   │   ├── Repositories/       # Các repository
-│   │   │   ├── Configurations/     # Entity configurations
-│   │   │   └── Migrations/         # Database migrations
-│   │   ├── ExternalServices/       # Tương tác với API bên ngoài
-│   │   ├── Logging/                # Cấu hình logging
-│   │   └── DependencyInjection.cs  # Đăng ký dependency
+│   ├── YourBookstore.Infrastructure/ # Tầng hạ tầng (Data Access Layer)
+│   │   ├── Data/                     # Tương tác với database
+│   │   │   ├── Contexts/             # DbContext
+│   │   │   │   └── EcommerceDbContext.cs
+│   │   │   ├── Migrations/           # Database migrations
+│   │   │   └── Repositories/         # Các repository
+│   │   │       └── BookRepository.cs
+│   │   │
+│   │   ├── Logging/                  # Cấu hình logging
+│   │   │   └── Logger.cs
+│   │   │
+│   │   └── DependencyInjection.cs    # Đăng ký dependency
 │   │
-│   └── YourProject.Shared/         # Mã nguồn dùng chung cho các tầng
-│       ├── Constants/              # Các hằng số
-│       ├── Helpers/                # Các hàm tiện ích
-│       └── Extensions/             # Extension methods dùng chung
+│   └── YourBookstore.Shared/         # Mã nguồn dùng chung cho các tầng (Shared Layer)
+│       ├── Constants/                # Các hằng số
+│       │   └── AppConstants.cs
+│       │
+│       ├── Helpers/                  # Các hàm tiện ích
+│       │   └── FormatHelpers.cs
+│       │
+│       └── Extensions/               # Extension methods dùng chung
+│           └── StringExtensions.cs
 │
-├── tests/                          # Mã nguồn kiểm thử
-│   ├── YourProject.UnitTests/      # Unit tests
-│   ├── YourProject.IntegrationTests/ # Integration tests
-│   └── YourProject.FunctionalTests/ # Functional/E2E tests
+├── tests/                            # Mã nguồn kiểm thử
+│   ├── YourBookstore.UnitTests/      # Unit tests
+│   │   └── BookServiceTests.cs
+│   │
+│   ├── YourBookstore.IntegrationTests/ # Integration tests
+│   │   └── BookRepositoryTests.cs
+│   │
+│   └── YourBookstore.FunctionalTests/ # Functional/E2E tests
+│       └── BookFlowTests.cs
 │
-├── tools/                          # Công cụ hỗ trợ phát triển
+├── tools/                            # Công cụ hỗ trợ phát triển
+│   └── GenerateTestData.cs
 │
-├── docs/                           # Tài liệu dự án
+├── docs/                             # Tài liệu dự án
+│   └── API_Documentation.md
 │
-├── .gitignore                      # Cấu hình Git ignore
-├── .editorconfig                   # Cấu hình editor
-├── global.json                     # Cấu hình .NET SDK version
-├── README.md                       # Mô tả dự án
-└── YourProject.sln                 # Solution file
+├── .gitignore                        # Cấu hình Git ignore
+├── .editorconfig                     # Cấu hình editor
+├── global.json                       # Cấu hình .NET SDK version
+├── README.md                         # Mô tả dự án
+└── YourBookstore.sln                 # Solution file
+
+
+- Entities -> Repositories -> Services(Core) -> DTOs -> Services(Web) -> ViewModel -> Controllers

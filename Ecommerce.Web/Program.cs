@@ -1,7 +1,14 @@
+using Ecommerce.Core.Entities;
+using Ecommerce.Infrastructure.Data.Configurations;
+using Ecommerce.Infrastructure.Data.Contexts;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDatabaseConfiguration(builder.Configuration);
 
 var app = builder.Build();
 
