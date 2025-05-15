@@ -18,9 +18,21 @@ namespace Ecommerce.Infrastructure.Data.Contexts
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // Bôkk
             builder.Entity<Book>()
                 .Property(b => b.Price)
             .HasColumnType("decimal(18,2)");
+
+            // User
+            builder.Entity<User>()
+                .HasIndex(u => u.UserName)
+                .IsUnique();
+            builder.Entity<User>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+            builder.Entity<User>()
+                .HasIndex(u => u.PhoneNumber)
+                .IsUnique();
 
             base.OnModelCreating(builder);
 

@@ -29,7 +29,6 @@ namespace Ecommerce.Core.Entities
         public int Stock { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-        [ForeignKey("CategoryId")]
         public required ICollection<Category> Categories { get; set; } // -> 1 sách - nhiều Category
         public required ICollection<Author> Authors { get; set; } // -> 1 sách - nhiều Author
     }
