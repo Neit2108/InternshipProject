@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Shared", "Ecommer
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{7F178C87-1B4A-409F-9A53-8C00197312A5}"
 	ProjectSection(SolutionItems) = preProject
-		docs.txt = docs.txt
+		docs.md = docs.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FF0C2413-19FA-4BEC-8EA9-2F4DAEA4E0EC}"

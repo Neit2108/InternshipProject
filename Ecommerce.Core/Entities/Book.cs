@@ -15,8 +15,6 @@ namespace Ecommerce.Core.Entities
         [Key]
         public int Id { get; set; }
         [Required]
-        public int CategoryId { get; set; }
-        [Required]
         [Column(TypeName = "nvarchar(255)")]
         public required string Name { get; set; }
         [Column(TypeName = "nvarchar")]
@@ -33,7 +31,6 @@ namespace Ecommerce.Core.Entities
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
         [ForeignKey("CategoryId")]
         public required ICollection<Category> Categories { get; set; } // -> 1 sách - nhiều Category
-        public required ICollection<Image> Images { get; set; } // -> 1 sách - nhiều Image
         public required ICollection<Author> Authors { get; set; } // -> 1 sách - nhiều Author
     }
 }

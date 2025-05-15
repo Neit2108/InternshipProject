@@ -13,8 +13,6 @@ namespace Ecommerce.Core.Entities
         [Key]
         public int Id { get; set; }
         [Required]
-        public int BookId { get; set; }
-        [Required]
         [StringLength(255)]
         [Column(TypeName = "nvarchar(255)")]
         public string Name { get; set; }

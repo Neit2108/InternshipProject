@@ -30,6 +30,6 @@ namespace Ecommerce.Core.Entities
         [StringLength(255)]
         [Column(TypeName = "nvarchar(255)")]
         public string? Bio { get; set; }
-
+        public ICollection<Book> Books { get; set; } // 1 - nhiều sách
     }
 }

@@ -27,9 +27,4 @@
     <ProjectReference Include="..\Ecommerce.Shared\Ecommerce.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTOs\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

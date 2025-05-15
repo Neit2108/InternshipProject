@@ -1,4 +1,4 @@
-﻿# Tài liệu cấu trúc dự án Ecommerce
+﻿# Tài liệu cấu trúc dự án Ecommerce (Tài liệu này được tham khảo từ nhiều nguồn, cụ thể là nhiều con AI khác nhau)
 
 ## Tổng quan
 
@@ -453,3 +453,32 @@ YourBookstore/
 
 
 - Entities -> Repositories -> Services(Core) -> DTOs -> Services(Web) -> ViewModel -> Controllers
+
+
+## Quy trình viết Unit test
+
+       ┌─────────────────────┐
+       │ 1. Chọn phương thức │
+       └─────────┬───────────┘
+                 ↓
+       ┌─────────────────────┐
+       │ 2. Tạo Test Project │
+       └─────────┬───────────┘
+                 ↓
+       ┌─────────────────────┐
+       │ 3. Mock dependency  │◄────┐
+       └─────────┬───────────┘     │
+                 ↓                 │
+       ┌─────────────────────┐     │
+       │ 4. Viết test method │     │
+       └─────────┬───────────┘     │
+     (AAA: Arrange - Act - Assert) │
+                 ↓                 │
+       ┌─────────────────────┐     │
+       │ 5. Kiểm thử case     │────┘
+       │    đặc biệt / lỗi   │
+       └─────────┬───────────┘
+                 ↓
+       ┌─────────────────────┐
+       │ 6. Chạy & duy trì   │
+       └─────────────────────┘

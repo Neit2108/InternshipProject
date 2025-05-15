@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ecommerce.Core.Entities;
+using Ecommerce.Core.Enums;
 using Ecommerce.Core.Interfaces;
 using Ecommerce.Infrastructure.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -65,7 +66,11 @@ namespace Ecommerce.Infrastructure.Data.Repositories
         {
             try
             {
-                var books = await _context.Books.ToListAsync();
+                var books = await _context.Books
+                    .Include(b => b.Categories)
+                    .Include(b => b.Authors)
+                    .ToListAsync();
+
                 if (!books.Any())
                 {
                     throw new InvalidOperationException("Không có sách nào trong danh sách");
@@ -83,7 +88,11 @@ namespace Ecommerce.Infrastructure.Data.Repositories
         {
             try
             {
-                var book = await _context.Books.FindAsync(id);
+                var book = await _context.Books
+                    .Include(b => b.Categories)
+                    .Include(b => b.Authors)
+                    .FirstOrDefaultAsync(b => b.Id == id);
+
                 if (book == null)
                 {
                     throw new KeyNotFoundException($"Không tìm thấy sách với ID {id}");
@@ -112,7 +121,6 @@ namespace Ecommerce.Infrastructure.Data.Repositories
                 existingBook.Stock = book.Stock;
                 existingBook.UpdatedAt = DateTime.UtcNow;
                 existingBook.Categories = book.Categories;
-                existingBook.Images = book.Images;
                 existingBook.Authors = book.Authors;
 
                 _context.Books.Update(existingBook);
